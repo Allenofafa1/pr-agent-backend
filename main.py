@@ -123,3 +123,16 @@ async def generate_content(topic: str):
 scheduler = AsyncIOScheduler()
 scheduler.add_job(lambda: asyncio.create_task(run_monitoring()), "interval", minutes=10)
 scheduler.start()
+from flask import Flask
+
+# Create Flask app
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return {"status": "running", "message": "PR Agent backend is live"}
+
+# Keep the scheduler running in the background
+if __name__ == "__main__":
+    scheduler.start()
+    app.run(host="0.0.0.0", port=5000)
