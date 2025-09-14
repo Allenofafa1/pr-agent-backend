@@ -1,9 +1,18 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from apscheduler.schedulers.background import BackgroundScheduler
 import uvicorn
 
 # Create the FastAPI app
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # allow all domains (for testing)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.post("/agent")
 def agent(query: dict):
     user_input = query.get("query", "")
