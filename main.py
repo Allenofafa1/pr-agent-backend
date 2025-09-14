@@ -4,6 +4,11 @@ import uvicorn
 
 # Create the FastAPI app
 app = FastAPI()
+@app.post("/agent")
+def agent(query: dict):
+    user_input = query.get("query", "")
+    # Dummy AI logic (replace with predictive monitoring, competitor analysis, etc.)
+    return {"reply": f"You asked: {user_input}. (Agent is thinking...)"}
 
 # Example scheduled job (replace with your agent logic)
 def test_job():
